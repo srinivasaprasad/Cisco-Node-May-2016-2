@@ -1,6 +1,7 @@
 //create an accumulator object
 
-var accumulator = require('./accumulator.js');
+var accFactory = require('./accumulator');
+var accumulator = accFactory();
 
 accumulator.add(100);
 accumulator.subtract(50);
