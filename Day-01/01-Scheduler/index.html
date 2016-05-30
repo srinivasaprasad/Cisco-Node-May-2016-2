@@ -3,8 +3,54 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Scheduler Demo</title>
+	<script>
+		window.addEventListener("DOMContentLoaded", init);
+		function init(){
+			var btnDoWork = document.getElementById("btnDoWork");
+			btnDoWork.addEventListener("click", onBtnDoWorkClick);
+		}
+		function onBtnDoWorkClick(){
+			displayMessage("Work Started..");
+			//triggerWork()
+			setTimeout(triggerWork);
+		}
+		function triggerWork(){
+			doWork(onWorkCompletion);
+			
+		}
+		function onWorkCompletion(){
+			displayMessage("Work Completed..");
+		}
+		function displayMessage(msg){
+			var divMessages = document.getElementById("divMessages");
+			divMessages.innerHTML += msg + "<br/>";
+		}
+		function doWork(onComplete){
+			var totalIterations = 1000,
+				currentIteration = 0;
+			function oneItertation(){
+				for(var i=0; i< (10000/totalIterations); i++)
+					for(var k=0; k<10000; k++)
+						for(var j=0; j<100; j++){
+
+						}
+				++currentIteration;
+				if (currentIteration < totalIterations){
+					setTimeout(oneItertation);
+				} else {
+					console.log("Job Done...");
+					if (typeof onComplete === 'function')
+						onComplete();
+				}
+			}
+			oneItertation();
+		}
+
+	</script>
 </head>
 <body>
-	
+	<input type="text" name="" id="">
+	<input type="button" value="Do Work" id="btnDoWork">
+	<div id="divMessages"></div>
 </body>
 </html>
