@@ -56,6 +56,9 @@ console.log('server listening on port 8080..!');
 
 /*
 
-/calculator?op=add&n1=100&n2=200
+data Parsing       				- dataParser.js
+serving static resources		- serveStatic.js
+handling calculator requests	- calculatorHandler.js
+handling 404					- notFoundHandler.js
 
 */
