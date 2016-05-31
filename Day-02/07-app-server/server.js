@@ -4,14 +4,14 @@ var dataParser = require('./dataParser');
 var serveStatic = require('./serveStatic.js');
 var calculatorHandler = require('./calculatorHandler');
 var notFoundHandler = require('./notFoundHandler');
+var app = require('./app');
 
-var server = http.createServer(function(req, res){
-	console.log('A new connection is established - ', req.url);
-	dataParser(req,res);
-	serveStatic(req, res);
-	calculatorHandler(req, res);
-	notFoundHandler(req, res);
-});
-server.listen(8080);
+app.use(dataParser);
+app.use(serveStatic);
+app.use(calculatorHandler);
+app.use(notFoundHandler);
+
+http.createServer(app).listen(8080);
+
 console.log('server listening on port 8080..!');
 
