@@ -3,7 +3,7 @@ var router = express.Router();
 
 var tasks = [
 	{id : 1, name : "Fix that bug", isCompleted : false},
-	{id : 2, name : "Master JavaScript", isCompleted : false},
+	{id : 2, name : "Master JavaScript", isCompleted : true},
 	{id : 3, name : "Explore Node.js", isCompleted : false}
 ];
 
@@ -31,5 +31,17 @@ router.post('/new', function(req, res, next){
 	};
 	tasks.push(newTask);
 	res.redirect('/tasks');
-})
+});
+
+router.get('/toggle/:id', function(req, res, next){
+	var taskId = parseInt(req.params.id,10);
+	var task = tasks.filter(function(task){
+		return task.id === taskId;
+	})[0];
+	if (task)
+		task.isCompleted = !task.isCompleted;
+	res.redirect('/tasks');
+});
+
+
 module.exports = router;
